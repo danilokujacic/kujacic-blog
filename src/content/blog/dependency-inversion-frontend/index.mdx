@@ -1,0 +1,30 @@
+---
+title: 'Dependency Inversion in Frontend'
+description: 'What is Dependency Inversion, the component of SOLID principles, and how it is used in modern Frontend languages.'
+date: 2025-05-26
+tags: ['v1.0.0']
+image: './banner.jpg'
+authors: ['kujacic']
+---
+
+### Intro
+
+Back in the time when I started programming (rather coding) I was asked by my mentor what patterns/principles have I used to create my starting project for the company. I didn't know how to answer that neither was I bothered much by the question he asked because at the time the only thing that was important to me was learning React basics and creating cool applications for myself. Later on in my career I approached SOLID principles and realised by just reading them that most of the principles I was always using just trying to keep my code "clean", but I never knew that I was actually following some standards that were already defined. All of them I could point out in my code by just reading their definition... all except one, the **Dependency Inversion principle**.
+
+### What is the rule of Dependency Inversion principle ?
+
+By definition the rule is that "High level modules should not depend on low level modules/implementations, instead both of them should communicate by abstraction". I paraphrased a bit, but anyways, I didn't understand a word neither could I point out where DI is in my code, especially frontend code I wrote back then. Time passed by and when people asked me about the DI i used the definition iI read acting smart and like I understand it, you would be surprised by how many people just stop at definition and say "aha" and just proceed with their lives like they understood something... it was good for me back in time because I got  credit for explaining stuff. That time came to an end back when my colleague from marketing asked me to explain the stuff I used in the code snippet i provided for their Instagram page. I implemented the snippet called "Dependency Injection in React" and DI is one of the implementations of Dependency Inversion principle.
+
+### So what are implementations existing in frontend world and how are they implementations of Dependency Inversion at first place ?
+
+So basically most of the time when you add some functionality without affecting the component or class or module logic you are doing some kind of Dependency Inversion and the so called "abstractions" that you utilize to implement that vary from framework to framework each having their own way of implementing it and I will cover the ones I'm working with mostly which are Angular and React:
+
+**Angular** uses Dependency Injection. It instantiates Injectable (service, store etc.) at some level (module, component, root) and passes down instance of it to child components that need their functionality. The benefits it gives to Angular is that later on for testing purposes these Injectables are easily replaceable by test or mock ones, and they can easily be removed from components so they do not depend on it which is **main goal**.
+
+**React** uses context and hooks to accommodate Dependency Inversion. By defining logic at context level later on by composition providing context wrapper and using hooks to obtain context data react implements functionality that components that use it **do not depend** on since you can easily remove hooks from that component.
+
+**Props** are also abstractions that are used as a way for two components two communicate and pass data between each other in which case DI is also satisfied.
+
+### Conclusion
+
+Its always a good  point to know exactly why and how stuff works out there and to learn rather principles than frameworks and programming languages. I learned all that from my experience working on various projects and I'm more than happy to share that knowledge with you guys.&#x20;
