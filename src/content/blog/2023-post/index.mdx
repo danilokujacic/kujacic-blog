@@ -1,0 +1,62 @@
+---
+title: 'Facades In Angular'
+description: 'How to utilize Facade pattern in writting complex logic for Angular applications making your code clean and components small and focused on UI logic.'
+date: 2025-05-26
+tags: ['v1.0.0']
+image: './banner.jpg'
+authors: ['kujacic']
+---
+
+#
+
+### The WHY
+
+As an Angular developer, and Frontend developer in general, I always heard people saying "Components must contain small UI logic", "Keep them clean and simple" and that's the standard I've been following when writing them.
+
+The issue is that not everything can be simple and clean since most of projects are very complex and demand introducing and writing a lot of shared services and logic making functionality hard to maintain in a long term. Another issue developers often neglect is knowledge and maturity of team they are working with. Not everyone is on same level nor understand why organising stuff and following some standards are important in feature, also, try to tell your manager about your architectural ideas :)
+
+So now how to keep your components clean and how to understand standards and making sure your team aligns with them ? Well there are few approaches to that:
+
+### Smart vs Dumb or Presentational vs Container components
+
+**Dumb/Presentationa**l
+
+Main idea behind these principles is that you separate your components in ones that are responsible only for presenting UI for users, not knowing anything about business logic inside application. Just being responsible for presenting some piece of UI given the set of parameters. They also can be named Pure components since they always render same kind of UI with no side effects for given the same props passed to them. They are easily testable + you can use them in any part of the code not worrying if they can cause some unnecessary HTTP calls or unnecessary service calls at all since they don't know anything about that.
+
+The following can be dumb components : Button, input, text field, card etc.
+
+**Smart/Container**
+
+These are the ones responsible for handling multiple things. First they indeed know a lot of and include a lot of business logic, use cases combining data with services and calling the presentational components. They are hardly testable since they can get very complex over time.
+
+The following can be smart components: User form, orders table, order wizard.
+
+<img height="215" width="585" src="/smart-dumb.png" />
+
+### Facades
+
+As I mentioned earlier in smart/dumb components scenario, most of the times smart components get too complex to handle since the code might be growing and whole complexity with the logic behind that. And there we separate from the concept "keep the components small and easy to use".
+
+In that case we introduce another layer to our architecture. The **Facades layer**.
+
+What is a facade ?
+
+The facade is Structural design pattern (one of GoF) which "hides" complex logic behind abstractions. The main goal is to provide high-level interface for developers to include them inside components.
+
+**Example:**
+
+Lets say in your Authentication domain you want to authenticate user, store user in ngrx store and redirect user
+
+In that case you have few injectables to handle: Router, Ngrx store, Authenticate service.
+
+You create new Injectable calling it AuthenticationFacade given the high level abstract method loginAndRedirect for example.
+
+Inside your component you inject the Facade itself and call the method.
+
+The benefits of it is now your components are easily testable whether the are presentational or container ones and you offload complexity to facade abstractions.
+
+<img height="215" width="483" src="/facade.png" />
+
+### Conclusion
+
+This is a great example of using Facades as pattern inside Angular applications. The facades are great fit to offload complexity from components layer and they are widely used in Domain Driven Development as part of abstractions. Keep in mind that bad abstractions are killer for your project and not to overuse facades as pattern.
