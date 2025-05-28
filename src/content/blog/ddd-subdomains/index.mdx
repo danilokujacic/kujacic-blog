@@ -1,0 +1,49 @@
+---
+title: 'Understaing business subdomains in Domain Driven Development'
+description: 'Understanding what are business subdomains, how to find them in a business, how to tackle them, and why understanding them is important for a software developer nowadays.'
+date: 2025-05-28
+tags: ['v1.0.0']
+image: './banner.png'
+authors: ['kujacic']
+---
+
+#
+
+### Intro
+
+Developers often neglect the importance of understanding the business side of the software they work on. Is it really important ? It depends if you want to be truly a good
+software engineer or just the one that writes the code. It is uncomparable how much value you can bring to a project and how much of use client can have of you if you truly
+understand how does a project work from a business perspective and what goal your client is trying to achieve.
+In this blog post i will explain how to tackle a business domain and split it in subdomains and what is the main purpouse of each subdomain that forms application. Look at the
+subdomains as a building blocks of an companys business.
+They are split into three categories: **core subdomains, generic subdomains, and supporting subdomains**.
+We will tackle what are they, what do they achieve, how can they change over time, and what are good implementing solutions that you can do for each.
+
+### Definition
+
+**Core subdomain** is the one that brigns company competetive advantage
+**Generic subdomain** is the one that is common to every company but doesnt bring any competetive advantage
+**Supporting subdomain** is the one that supports bringing core subdomain but itself alone doesnt have any competetive edge
+
+### Complexity
+
+**Supporting subdomains** are often the least complex from those three. They can be catalogs, dashboards, tables CRUD operations that are the easiest to implement. They can also
+be very complex growing over time but they do not change a companys competetive advantage.
+**Generic subdomains** are often very complex like data hashing, authentication, validation etc. These are the part of business that you are not reinventing. You often use existing technical solutions to tackle these problems.
+**Core subdomains** have also big complexity. Its the heart of business and it must be as unique as possible and hard for other competitors to copy
+
+### Volatiliy (how much can subdomain change over time)
+
+**Core subdomains** can change often. As mentioned before, they are core of company businesses and it must be unique and hard to copy. If you manage to achieve goal of that subdomain
+at first try, the possibility is, your core subdomain is not unique enough. They are constantly evolving over time and its the part of businesses the company have the most focus on.
+On the other side **supporting subdomains** are the ones that don't change often. They are not that important for companies competetivenes.
+**Generic subdomains** can change over time if decided to use diffirent approaches or just security patches fixes etc.
+
+### Solution strategy
+
+**Core subdomains** are the ones that company itself needs to implement. It would be very very wise not to outsource someone, or even worse, use some generic solution to tackle
+the core subdomain goal. It must be unique and hard to copy. Company should hire their best engineers to work on these subdomains and have its own codebase so later on in
+future it would be easy to change or extend this part.
+**Generic subdomains** are the ones that are hard to tackle, but it would be wise to use generic solution and paid services.
+**Supporting subdomains** are the ones that would be ideal to be outsourced but generic solutions cannot be used since there aren't such. It would be wise to use less experienced
+engineering team on these.
