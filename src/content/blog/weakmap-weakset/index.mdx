@@ -1,0 +1,84 @@
+---
+title: 'WeakMap and WeakSet'
+description: 'What are WeakMap and WeakSet and where are they used.'
+date: 2025-05-26
+tags: ['v1.0.0']
+image: './banner.jpg'
+authors: ['kujacic']
+---
+
+#
+
+### Intro
+
+In this blog I will show you and explain as well where and how **WeakMap** and **WeakSet** are being used in todays application.
+Im pretty sure you haven't encountered much cases neither am I, but its always good to know something more and they are very common interview questions.
+
+### WeakMap
+
+**WeakMap** acts just like an normal Map except it can only store objects and it lets objects that are not referenced be garbage collected. It can be used in caching strategies, proxies, or private data storage for objects.
+
+In following case i will show can WeakMap be utilized to add some secret data to existing classes without modifying their implementations:
+
+```javascript
+const cache = new WeakMap()
+
+class User {
+  constructor(password) {
+    cache.set(this, { password })
+  }
+}
+
+const user = new User('password123')
+console.log(cache.get(user).password)
+```
+
+In this case I use WeakMap to add some metadata to HTML element. WeakMap is good usage here because as soon as that element dissapears from DOM, it gets garbage collected automatically.
+
+```javascript
+const element = document.querySelector('#div')
+const elementsMetadata = new WeakMap()
+
+elementsMetadata.set(element, { draggable: true })
+
+const elementMetadataa = elementsMetadata.get(element)
+```
+
+### WeakSet
+
+WeakSet are just like basic Set but with only objects as items and are garbage-collectable just like WeakMap.
+
+The only use case for WeakSet i found on internet so far is detecting circular references
+
+```javascript
+// Execute a callback on everything stored inside an object
+function execRecursively(fn, subject, _refs = new WeakSet()) {
+  // Avoid infinite recursion
+  if (_refs.has(subject)) {
+    return
+  }
+
+  fn(subject)
+  if (typeof subject === 'object' && subject) {
+    _refs.add(subject)
+    for (const key in subject) {
+      execRecursively(fn, subject[key], _refs)
+    }
+    _refs.delete(subject)
+  }
+}
+
+const foo = {
+  foo: 'Foo',
+  bar: {
+    bar: 'Bar',
+  },
+}
+
+foo.bar.baz = foo // Circular reference!
+execRecursively((obj) => console.log(obj), foo)
+```
+
+### Conclusion
+
+Although not used in many case and most probably you will not encounter use case for these, they are often used as a interview questions for advanced developers and certanly something you want to have knowledge of.
